@@ -32,7 +32,7 @@ public class Pessoa {
 	private String UF;
 	
 	
-	//Construtores
+
 	public Pessoa() {}
 	public Pessoa(Long id, String nome, String endereco, String CEP, String cidade, String UF) {
 		this.id = id;
