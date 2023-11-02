@@ -10,6 +10,6 @@ public interface PessoaServiceInterface {
 	Pessoa save(Pessoa pessoa);
 	Optional<Pessoa> getById(Long id);
 	List<Pessoa> getAll();
-	Pessoa update(Pessoa pessoa);
+	Pessoa update(Long id, Pessoa pessoa);
 	void delete(Long id);
 }

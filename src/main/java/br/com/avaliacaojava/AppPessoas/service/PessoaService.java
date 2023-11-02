@@ -36,7 +36,7 @@ public class PessoaService implements PessoaServiceInterface {
 	}
 
 	@Override
-	public Pessoa update(Pessoa pessoa) {
+	public Pessoa update(Long id, Pessoa pessoa) {
 		
 		Optional<Pessoa> upPessoa = pessoaRepository.findById(pessoa.getId());
 		
