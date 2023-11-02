@@ -1,12 +1,15 @@
 package br.com.avaliacaojava.AppPessoas.model;
 
+import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,6 +33,9 @@ public class Pessoa {
 	
 	@Column(nullable = true)
 	private String UF;
+	
+	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
+    private List<Contato> contatos;
 	
 	
 
@@ -81,6 +87,15 @@ public class Pessoa {
 	public void setUF(String uF) {
 		UF = uF;
 	}
+	public List<Contato> getContatos() {
+		return contatos;
+	}
+	public void setContatos(List<Contato> contatos) {
+		this.contatos = contatos;
+	}
+	
+	
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

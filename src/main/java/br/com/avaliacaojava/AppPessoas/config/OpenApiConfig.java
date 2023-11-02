@@ -18,8 +18,8 @@ public class OpenApiConfig {
 				.components(new Components().addSecuritySchemes("basicScheme",
 						new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("basic")))
 				.info(new Info()
-						.title("App Cadastro de produtos")
-						.description("Este aplicativo faz controle de cadastro de produtos")
+						.title("App Cadastro de pessoas e contatos")
+						.description("Este aplicativo faz controle de cadastro de pessoas e contatos")
 						.contact(new Contact().name("Nome").email("email").url("url"))
 						.version("Versão 0.0.1-SNAPSHOT"));
 	}
