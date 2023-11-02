@@ -37,7 +37,7 @@ public class Pessoa {
 	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
     private List<Contato> contatos;
 	
-	
+
 
 	public Pessoa() {}
 	public Pessoa(Long id, String nome, String endereco, String CEP, String cidade, String UF) {
@@ -93,7 +93,6 @@ public class Pessoa {
 	public void setContatos(List<Contato> contatos) {
 		this.contatos = contatos;
 	}
-	
 	
 	
 	@Override

@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.avaliacaojava.AppPessoas.dto.MalaDiretaDTO;
 import br.com.avaliacaojava.AppPessoas.model.Pessoa;
 import br.com.avaliacaojava.AppPessoas.service.PessoaService;
 
-@RestController
-@RequestMapping("/api/pessoas") //http://localhost:8080/api/produtos
+@RestController                                 
+@RequestMapping("/api/pessoas") //http://localhost:8080/api/pessoas
 public class PessoaController {
 	
 	private PessoaService pessoaService;
@@ -37,7 +38,7 @@ public class PessoaController {
 		return ResponseEntity.ok(produtos);
 	}
 	
-	@GetMapping("/{id}") //http://localhost:8080/api/produtos/12
+	@GetMapping("/{id}") //http://localhost:8080/api/pessoas/{id}
 	public ResponseEntity<Optional<Pessoa>> getById(@PathVariable Long id){
 		Optional<Pessoa> produto = pessoaService.getById(id);
 		if(produto == null)
@@ -45,6 +46,17 @@ public class PessoaController {
 		return ResponseEntity.ok(produto);
 	}
 	
+	@GetMapping("/maladireta/{id}") //http://localhost:8080/api/pessoas/maladireta/{id}
+    public ResponseEntity<MalaDiretaDTO> obterPessoaParaMalaDireta(@PathVariable Long id) {
+        Optional<Pessoa> pessoa = pessoaService.getById(id);
+        if (pessoa.isPresent()) {
+            MalaDiretaDTO malaDireta = MalaDiretaDTO.fromPessoa(pessoa.get());
+            return ResponseEntity.ok(malaDireta);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 	@PostMapping
 	public ResponseEntity<Pessoa> save(@RequestBody Pessoa produto){
 		Pessoa newProduto = pessoaService.save(produto);
