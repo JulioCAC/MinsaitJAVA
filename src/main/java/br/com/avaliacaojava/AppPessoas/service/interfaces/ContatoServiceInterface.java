@@ -10,6 +10,6 @@ public interface ContatoServiceInterface {
 	Contato save(Contato contato);
 	Optional<Contato> getById(Long id);
 	List<Contato> getAll();
-	Contato update(Contato contato);
+	Contato update(Long id, Contato contato);
 	void delete(Long id);
 }

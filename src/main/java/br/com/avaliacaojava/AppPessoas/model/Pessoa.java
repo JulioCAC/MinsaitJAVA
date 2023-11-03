@@ -34,8 +34,7 @@ public class Pessoa {
 	@Column(nullable = true)
 	private String UF;
 	
-	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
-    private List<Contato> contatos;
+	
 	
 
 
@@ -87,12 +86,7 @@ public class Pessoa {
 	public void setUF(String uF) {
 		UF = uF;
 	}
-	public List<Contato> getContatos() {
-		return contatos;
-	}
-	public void setContatos(List<Contato> contatos) {
-		this.contatos = contatos;
-	}
+	
 	
 	
 	@Override

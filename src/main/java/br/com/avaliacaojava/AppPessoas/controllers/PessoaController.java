@@ -13,8 +13,7 @@ import br.com.avaliacaojava.AppPessoas.service.PessoaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
+
 
 @RestController
 @RequestMapping("/api/pessoas") 
@@ -74,7 +73,8 @@ public class PessoaController {
 	@PostMapping
 	@Operation(summary = "Criar uma nova pessoa")
 	@ApiResponses(value = {
-		@ApiResponse(responseCode = "200", description = "Pessoa criada com sucesso")
+		@ApiResponse(responseCode = "200", description = "Pessoa criada com sucesso"),
+		@ApiResponse(responseCode = "400", description = "Requisição inválida")
 	})
 	public ResponseEntity<Pessoa> save(@RequestBody Pessoa pessoa) {
 		Pessoa newPessoa = pessoaService.save(pessoa);
@@ -85,6 +85,7 @@ public class PessoaController {
 	@Operation(summary = "Atualizar uma pessoa por ID")
 	@ApiResponses(value = {
 		@ApiResponse(responseCode = "200", description = "Pessoa atualizada com sucesso"),
+		@ApiResponse(responseCode = "400", description = "Requisição inválida"),
 		@ApiResponse(responseCode = "404", description = "Pessoa não encontrada para atualização")
 	})
 	public ResponseEntity<Pessoa> update(@PathVariable Long id, @RequestBody Pessoa pessoa) {

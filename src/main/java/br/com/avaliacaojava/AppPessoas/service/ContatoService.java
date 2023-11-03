@@ -2,10 +2,8 @@ package br.com.avaliacaojava.AppPessoas.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import br.com.avaliacaojava.AppPessoas.model.Contato;
 import br.com.avaliacaojava.AppPessoas.repository.ContatoRepository;
 import br.com.avaliacaojava.AppPessoas.service.interfaces.ContatoServiceInterface;
@@ -36,7 +34,7 @@ public class ContatoService implements ContatoServiceInterface {
 	}
 
 	@Override
-	public Contato update(Contato contato) {
+	public Contato update(Long id, Contato contato) {
 		
 		Optional<Contato> upContato = contatoRepository.findById(contato.getId());
 		
@@ -54,4 +52,6 @@ public class ContatoService implements ContatoServiceInterface {
 	public void delete(Long id) {
 		contatoRepository.deleteById(id);
 	}
+	
 }
+	
