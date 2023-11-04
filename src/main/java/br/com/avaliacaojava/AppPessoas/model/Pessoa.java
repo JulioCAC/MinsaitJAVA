@@ -1,7 +1,12 @@
 package br.com.avaliacaojava.AppPessoas.model;
 
+
+
 import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -22,17 +27,21 @@ public class Pessoa {
 	@Column(nullable = false)
 	private String nome;
 	
-	@Column(nullable = true)
+	@Column
 	private String endereco ;
 	
-	@Column(nullable = true)
+	@Column
 	private String CEP;
 	
-	@Column(nullable = true)
+	@Column
 	private String cidade;
 	
-	@Column(nullable = true)
+	@Column
 	private String UF;
+	
+	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
+	private List<Contato> contatos;
+	
 	
 	
 	
@@ -49,7 +58,7 @@ public class Pessoa {
 	}
 	
 	
-	
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	public Long getId() {
 		return id;
 	}
@@ -87,7 +96,12 @@ public class Pessoa {
 		UF = uF;
 	}
 	
-	
+	public List<Contato> getContatos() {
+		return contatos;
+	}
+	public void setContatos(List<Contato> contatos) {
+		this.contatos = contatos;
+	}
 	
 	@Override
 	public int hashCode() {

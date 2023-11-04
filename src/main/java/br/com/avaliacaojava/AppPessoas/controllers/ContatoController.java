@@ -23,35 +23,23 @@ public class ContatoController {
     public ContatoController(ContatoService contatoService) {
         this.contatoService = contatoService;
     }
-
-    @PostMapping("/{id}/contatos")
-    @Operation(summary = "Adiciona um novo Contato a uma Pessoa")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "201", description = "Contato criado com sucesso"),
-        @ApiResponse(responseCode = "400", description = "Requisição inválida"),
-        @ApiResponse(responseCode = "404", description = "Pessoa não encontrada")
-    })
-    public ResponseEntity<Contato> save(@RequestBody Contato contato) {
-		Contato newContato = contatoService.save(contato);
-		return ResponseEntity.ok(newContato);
-	}
-
-    @GetMapping("/{id}/contatos")
+    
     @Operation(summary = "Retorna os dados de um Contato por ID")
+    @GetMapping("/contatos/{idContato}")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Contato encontrado"),
         @ApiResponse(responseCode = "404", description = "Contato não encontrado")
     })
-    public ResponseEntity<List<Contato>> getAllContato() {
-        List<Contato> contatos = contatoService.getAll();
-        if (contatos.isEmpty()) {
+    public ResponseEntity<Optional<Contato>> getContatoById(@PathVariable Long idContato) {
+        Optional<Contato> contato = contatoService.getById(idContato);
+        if (contato == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(contatos);
+        return ResponseEntity.ok(contato);
     }
 
-    @GetMapping("{idPessoa}/listacontatos")
     @Operation(summary = "Lista todos os Contatos de uma Pessoa")
+    @GetMapping("{idPessoa}/listacontatos")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Contatos da Pessoa encontrados"),
         @ApiResponse(responseCode = "404", description = "Pessoa não encontrada")
@@ -62,32 +50,44 @@ public class ContatoController {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(contatos);
+	}	
+    
+    @Operation(summary = "Adiciona um novo Contato a uma Pessoa")
+    @PostMapping("/{idPessoa}/contatos")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Contato criado com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Requisição inválida"),
+        @ApiResponse(responseCode = "404", description = "Pessoa não encontrada")
+    })
+    public ResponseEntity<Contato> save(@RequestBody Contato contato) {
+		Contato newContato = contatoService.save(contato);
+		return ResponseEntity.ok(newContato);
 	}
 
-    @PutMapping("/{id}/contatos")
     @Operation(summary = "Atualiza um Contato existente")
+    @PutMapping("/contatos/{idContato}")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Contato atualizado com sucesso"),
         @ApiResponse(responseCode = "404", description = "Contato não encontrado")
     })
-    public ResponseEntity<Contato> update(@PathVariable Long id, @RequestBody Contato contato) {
-		Contato updatedContato = contatoService.update(id, contato);
+    public ResponseEntity<Contato> update(@PathVariable Long idContato, @RequestBody Contato contato) {
+		Contato updatedContato = contatoService.update(idContato, contato);
 		if (updatedContato == null) {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(updatedContato);
 	}
 
-    @DeleteMapping("/{id}/contatos")
     @Operation(summary = "Remove um Contato por ID")
+    @DeleteMapping("/contatos/{idContato}")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "204", description = "Contato removido com sucesso"),
         @ApiResponse(responseCode = "404", description = "Contato não encontrado")
     })
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        Optional<Contato> contato = contatoService.getById(id);
+    public ResponseEntity<?> delete(@PathVariable Long idContato) {
+        Optional<Contato> contato = contatoService.getById(idContato);
         if (contato.isPresent()) {
-            contatoService.delete(id);
+            contatoService.delete(idContato);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } else {
             return ResponseEntity.notFound().build();

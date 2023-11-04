@@ -8,8 +8,8 @@ import br.com.avaliacaojava.AppPessoas.model.Contato;
 
 public interface ContatoServiceInterface {
 	Contato save(Contato contato);
-	Optional<Contato> getById(Long id);
+	Optional<Contato> getById(Long idContato);
 	List<Contato> getAll();
 	Contato update(Long id, Contato contato);
-	void delete(Long id);
+	void delete(Long idContato);
 }

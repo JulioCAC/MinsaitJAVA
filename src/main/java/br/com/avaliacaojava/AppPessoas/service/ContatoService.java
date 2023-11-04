@@ -24,8 +24,8 @@ public class ContatoService implements ContatoServiceInterface {
 	}
 
 	@Override
-	public Optional<Contato> getById(Long id) {
-		return contatoRepository.findById(id);
+	public Optional<Contato> getById(Long idContato) {
+		return contatoRepository.findById(idContato);
 	}
 
 	@Override
@@ -34,9 +34,9 @@ public class ContatoService implements ContatoServiceInterface {
 	}
 
 	@Override
-	public Contato update(Long id, Contato contato) {
+	public Contato update(Long idContato, Contato contato) {
 		
-		Optional<Contato> upContato = contatoRepository.findById(contato.getId());
+		Optional<Contato> upContato = contatoRepository.findById(contato.getIdContato());
 		
 		
 		if(upContato.isPresent()) {
@@ -49,8 +49,8 @@ public class ContatoService implements ContatoServiceInterface {
 	}
 
 	@Override
-	public void delete(Long id) {
-		contatoRepository.deleteById(id);
+	public void delete(Long idContato) {
+		contatoRepository.deleteById(idContato);
 	}
 	
 }

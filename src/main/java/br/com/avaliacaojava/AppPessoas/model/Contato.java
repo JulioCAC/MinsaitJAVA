@@ -2,6 +2,7 @@ package br.com.avaliacaojava.AppPessoas.model;
 
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,17 +18,19 @@ public class Contato {
 
 	 @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id;
+	    private Long idContato;
 
-	    @Column(nullable = false)
+	    @Column
 	    private Integer tipoContato; 
 
-	    @Column(nullable = false)
+	    @Column
 	    private String contato;
 
-	    @ManyToOne
+	    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	    @JoinColumn(name = "pessoa_id")
 	    private Pessoa pessoa;
+	    
+	
 
 	
 	public Contato() {}
@@ -39,12 +42,12 @@ public class Contato {
 	
 	
 
-	public Long getId() {
-		return id;
+	public Long getIdContato() {
+		return idContato;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdContato(Long idContato) {
+		this.idContato = idContato;
 	}
 
 	public Integer getTipoContato() {
@@ -70,10 +73,12 @@ public class Contato {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(idContato);
 	}
 
 	@Override
@@ -85,7 +90,7 @@ public class Contato {
 		if (getClass() != obj.getClass())
 			return false;
 		Contato other = (Contato) obj;
-		return Objects.equals(id, other.id);
+		return Objects.equals(idContato, other.idContato);
 	}
 
 }

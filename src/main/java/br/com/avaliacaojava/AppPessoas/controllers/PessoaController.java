@@ -26,8 +26,8 @@ public class PessoaController {
 		this.pessoaService = pessoaService;
 	}
 	
-	@GetMapping
 	@Operation(summary = "Obter todas as pessoas")
+	@GetMapping
 	@ApiResponses(value = {
 	        @ApiResponse(responseCode = "200", description = "Pessoas recuperadas com sucesso"),
 	        @ApiResponse(responseCode = "404", description = "Nenhuma pessoa encontrada")
@@ -40,8 +40,8 @@ public class PessoaController {
 		return ResponseEntity.ok(pessoas);
 	}
 	
-	@GetMapping("/{id}")
 	@Operation(summary = "Obter uma pessoa por ID")
+	@GetMapping("/{id}")
 	@ApiResponses(value = {
 		@ApiResponse(responseCode = "200", description = "Pessoa encontrada"),
 		@ApiResponse(responseCode = "404", description = "Pessoa não encontrada")
@@ -54,8 +54,8 @@ public class PessoaController {
 		return ResponseEntity.ok(pessoa);
 	}
 	
-	@GetMapping("/maladireta/{id}")
 	@Operation(summary = "Obter informações de mala direta para uma pessoa")
+	@GetMapping("/maladireta/{id}")
 	@ApiResponses(value = {
 		@ApiResponse(responseCode = "200", description = "Informações de mala direta obtidas"),
 		@ApiResponse(responseCode = "404", description = "Pessoa não encontrada para mala direta")
@@ -70,8 +70,8 @@ public class PessoaController {
 		}
 	}
 
-	@PostMapping
 	@Operation(summary = "Criar uma nova pessoa")
+	@PostMapping
 	@ApiResponses(value = {
 		@ApiResponse(responseCode = "200", description = "Pessoa criada com sucesso"),
 		@ApiResponse(responseCode = "400", description = "Requisição inválida")
@@ -81,8 +81,8 @@ public class PessoaController {
 		return ResponseEntity.ok(newPessoa);
 	}
 	
-	@PutMapping("/{id}")
 	@Operation(summary = "Atualizar uma pessoa por ID")
+	@PutMapping("/{id}")
 	@ApiResponses(value = {
 		@ApiResponse(responseCode = "200", description = "Pessoa atualizada com sucesso"),
 		@ApiResponse(responseCode = "400", description = "Requisição inválida"),
@@ -96,8 +96,8 @@ public class PessoaController {
 		return ResponseEntity.ok(updatedPessoa);
 	}
 	
+	@Operation(summary = "Deletar uma pessoa por ID")
 	@DeleteMapping("/{id}")
-	@Operation(summary = "Excluir uma pessoa por ID")
 	@ApiResponses(value = {
 		@ApiResponse(responseCode = "204", description = "Pessoa excluída com sucesso"),
 		@ApiResponse(responseCode = "404", description = "Pessoa não encontrada para exclusão")
